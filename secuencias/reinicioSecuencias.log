@@ -1,0 +1,102 @@
+   ----- (postgres7): SELECT a.attname, t.typname, a.attlen, a.atttypmod,
+   a.attnotnull, a.atthasdef, a.attnum FROM pg_class c, pg_attribute a,
+   pg_type t WHERE relkind = 'r' AND (c.relname='dependencia' or c.relname
+   = lower('dependencia')) and a.attname not like '....%' AND a.attnum > 0
+   AND a.atttypid = t.oid AND a.attrelid = c.oid ORDER BY a.attnum -----
+   ----- (postgres7): SELECT ic.relname AS index_name, a.attname AS
+   column_name, i.indisunique AS unique_key, i.indisprimary AS primary_key
+   FROM pg_class bc, pg_class ic, pg_index i, pg_attribute a WHERE bc.oid
+   = i.indrelid AND ic.oid = i.indexrelid AND (i.indkey[0] = a.attnum OR
+   i.indkey[1] = a.attnum OR i.indkey[2] = a.attnum OR i.indkey[3] =
+   a.attnum OR i.indkey[4] = a.attnum OR i.indkey[5] = a.attnum OR
+   i.indkey[6] = a.attnum OR i.indkey[7] = a.attnum) AND a.attrelid =
+   bc.oid AND bc.relname = 'dependencia' ----- ----- (postgres7): SELECT
+   d.adnum as num, d.adsrc as def from pg_attrdef d, pg_class c where
+   d.adrelid=c.oid and c.relname='dependencia' order by d.adnum -----
+   ----- (postgres7): SELECT depe_rad_tp1, depe_rad_tp2, depe_rad_tp4,
+   depe_rad_tp3 FROM dependencia -----
+   DROP SEQUENCE secr_tp1_1021;
+   ----- (postgres7): DROP SEQUENCE secr_tp1_1021; ----- Secuencia
+   secr_tp1_1021 eliminada.DROP SEQUENCE secr_tp2_1021;
+   ----- (postgres7): DROP SEQUENCE secr_tp2_1021; ----- Secuencia
+   secr_tp2_1021 eliminada.DROP SEQUENCE secr_tp4_2051;
+   ----- (postgres7): DROP SEQUENCE secr_tp4_2051; ----- Secuencia
+   secr_tp4_2051 eliminada.DROP SEQUENCE secr_tp3_1021;
+   ----- (postgres7): DROP SEQUENCE secr_tp3_1021; ----- Secuencia
+   secr_tp3_1021 eliminada.DROP SEQUENCE secr_tp1_0999;
+   ----- (postgres7): DROP SEQUENCE secr_tp1_0999; ----- Secuencia
+   secr_tp1_0999 eliminada.DROP SEQUENCE secr_tp2_0999;
+   ----- (postgres7): DROP SEQUENCE secr_tp2_0999; ----- Secuencia
+   secr_tp2_0999 eliminada.DROP SEQUENCE secr_tp4_0999;
+   ----- (postgres7): DROP SEQUENCE secr_tp4_0999; ----- Secuencia
+   secr_tp4_0999 eliminada.DROP SEQUENCE secr_tp3_0999;
+   ----- (postgres7): DROP SEQUENCE secr_tp3_0999; ----- Secuencia
+   secr_tp3_0999 eliminada.DROP SEQUENCE secr_tp1_0998;
+   ----- (postgres7): DROP SEQUENCE secr_tp1_0998; ----- Secuencia
+   secr_tp1_0998 eliminada.DROP SEQUENCE secr_tp2_0998;
+   ----- (postgres7): DROP SEQUENCE secr_tp2_0998; ----- Secuencia
+   secr_tp2_0998 eliminada.DROP SEQUENCE secr_tp4_0998;
+   ----- (postgres7): DROP SEQUENCE secr_tp4_0998; ----- Secuencia
+   secr_tp4_0998 eliminada.DROP SEQUENCE secr_tp3_0998;
+   ----- (postgres7): DROP SEQUENCE secr_tp3_0998; ----- Secuencia
+   secr_tp3_0998 eliminada.CREATE SEQUENCE secr_tp1_1021 INCREMENT 1
+   MINVALUE 1 MAXVALUE 9999999999999999 START 1 CACHE 1; ALTER TABLE
+   secr_tp1_1021 OWNER TO orfeo_usr;
+   ----- (postgres7): CREATE SEQUENCE secr_tp1_1021 INCREMENT 1 MINVALUE 1
+   MAXVALUE 9999999999999999 START 1 CACHE 1; ALTER TABLE secr_tp1_1021
+   OWNER TO orfeo_usr; ----- Secuencia secr_tp1_1021 creada.CREATE
+   SEQUENCE secr_tp2_1021 INCREMENT 1 MINVALUE 1 MAXVALUE 9999999999999999
+   START 1 CACHE 1; ALTER TABLE secr_tp2_1021 OWNER TO orfeo_usr;
+   ----- (postgres7): CREATE SEQUENCE secr_tp2_1021 INCREMENT 1 MINVALUE 1
+   MAXVALUE 9999999999999999 START 1 CACHE 1; ALTER TABLE secr_tp2_1021
+   OWNER TO orfeo_usr; ----- Secuencia secr_tp2_1021 creada.CREATE
+   SEQUENCE secr_tp4_2051 INCREMENT 1 MINVALUE 1 MAXVALUE 9999999999999999
+   START 1 CACHE 1; ALTER TABLE secr_tp4_2051 OWNER TO orfeo_usr;
+   ----- (postgres7): CREATE SEQUENCE secr_tp4_2051 INCREMENT 1 MINVALUE 1
+   MAXVALUE 9999999999999999 START 1 CACHE 1; ALTER TABLE secr_tp4_2051
+   OWNER TO orfeo_usr; ----- Secuencia secr_tp4_2051 creada.CREATE
+   SEQUENCE secr_tp3_1021 INCREMENT 1 MINVALUE 1 MAXVALUE 9999999999999999
+   START 1 CACHE 1; ALTER TABLE secr_tp3_1021 OWNER TO orfeo_usr;
+   ----- (postgres7): CREATE SEQUENCE secr_tp3_1021 INCREMENT 1 MINVALUE 1
+   MAXVALUE 9999999999999999 START 1 CACHE 1; ALTER TABLE secr_tp3_1021
+   OWNER TO orfeo_usr; ----- Secuencia secr_tp3_1021 creada.CREATE
+   SEQUENCE secr_tp1_0999 INCREMENT 1 MINVALUE 1 MAXVALUE 9999999999999999
+   START 1 CACHE 1; ALTER TABLE secr_tp1_0999 OWNER TO orfeo_usr;
+   ----- (postgres7): CREATE SEQUENCE secr_tp1_0999 INCREMENT 1 MINVALUE 1
+   MAXVALUE 9999999999999999 START 1 CACHE 1; ALTER TABLE secr_tp1_0999
+   OWNER TO orfeo_usr; ----- Secuencia secr_tp1_0999 creada.CREATE
+   SEQUENCE secr_tp2_0999 INCREMENT 1 MINVALUE 1 MAXVALUE 9999999999999999
+   START 1 CACHE 1; ALTER TABLE secr_tp2_0999 OWNER TO orfeo_usr;
+   ----- (postgres7): CREATE SEQUENCE secr_tp2_0999 INCREMENT 1 MINVALUE 1
+   MAXVALUE 9999999999999999 START 1 CACHE 1; ALTER TABLE secr_tp2_0999
+   OWNER TO orfeo_usr; ----- Secuencia secr_tp2_0999 creada.CREATE
+   SEQUENCE secr_tp4_0999 INCREMENT 1 MINVALUE 1 MAXVALUE 9999999999999999
+   START 1 CACHE 1; ALTER TABLE secr_tp4_0999 OWNER TO orfeo_usr;
+   ----- (postgres7): CREATE SEQUENCE secr_tp4_0999 INCREMENT 1 MINVALUE 1
+   MAXVALUE 9999999999999999 START 1 CACHE 1; ALTER TABLE secr_tp4_0999
+   OWNER TO orfeo_usr; ----- Secuencia secr_tp4_0999 creada.CREATE
+   SEQUENCE secr_tp3_0999 INCREMENT 1 MINVALUE 1 MAXVALUE 9999999999999999
+   START 1 CACHE 1; ALTER TABLE secr_tp3_0999 OWNER TO orfeo_usr;
+   ----- (postgres7): CREATE SEQUENCE secr_tp3_0999 INCREMENT 1 MINVALUE 1
+   MAXVALUE 9999999999999999 START 1 CACHE 1; ALTER TABLE secr_tp3_0999
+   OWNER TO orfeo_usr; ----- Secuencia secr_tp3_0999 creada.CREATE
+   SEQUENCE secr_tp1_0998 INCREMENT 1 MINVALUE 1 MAXVALUE 9999999999999999
+   START 1 CACHE 1; ALTER TABLE secr_tp1_0998 OWNER TO orfeo_usr;
+   ----- (postgres7): CREATE SEQUENCE secr_tp1_0998 INCREMENT 1 MINVALUE 1
+   MAXVALUE 9999999999999999 START 1 CACHE 1; ALTER TABLE secr_tp1_0998
+   OWNER TO orfeo_usr; ----- Secuencia secr_tp1_0998 creada.CREATE
+   SEQUENCE secr_tp2_0998 INCREMENT 1 MINVALUE 1 MAXVALUE 9999999999999999
+   START 1 CACHE 1; ALTER TABLE secr_tp2_0998 OWNER TO orfeo_usr;
+   ----- (postgres7): CREATE SEQUENCE secr_tp2_0998 INCREMENT 1 MINVALUE 1
+   MAXVALUE 9999999999999999 START 1 CACHE 1; ALTER TABLE secr_tp2_0998
+   OWNER TO orfeo_usr; ----- Secuencia secr_tp2_0998 creada.CREATE
+   SEQUENCE secr_tp4_0998 INCREMENT 1 MINVALUE 1 MAXVALUE 9999999999999999
+   START 1 CACHE 1; ALTER TABLE secr_tp4_0998 OWNER TO orfeo_usr;
+   ----- (postgres7): CREATE SEQUENCE secr_tp4_0998 INCREMENT 1 MINVALUE 1
+   MAXVALUE 9999999999999999 START 1 CACHE 1; ALTER TABLE secr_tp4_0998
+   OWNER TO orfeo_usr; ----- Secuencia secr_tp4_0998 creada.CREATE
+   SEQUENCE secr_tp3_0998 INCREMENT 1 MINVALUE 1 MAXVALUE 9999999999999999
+   START 1 CACHE 1; ALTER TABLE secr_tp3_0998 OWNER TO orfeo_usr;
+   ----- (postgres7): CREATE SEQUENCE secr_tp3_0998 INCREMENT 1 MINVALUE 1
+   MAXVALUE 9999999999999999 START 1 CACHE 1; ALTER TABLE secr_tp3_0998
+   OWNER TO orfeo_usr; ----- Secuencia secr_tp3_0998 creada.

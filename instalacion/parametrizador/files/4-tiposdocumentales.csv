@@ -1,0 +1,73 @@
+Código tipo documental;Nombre del tipo documental;Días de termino;Aplica para radicado salida;Aplica para radicado entrada;Aplica para radicado de PQR
+1;Demanda;15;1;1;1
+2;Auto de admisión de la demanda;15;1;1;1
+3;Notificación de la demanda;15;1;1;1
+4;Contestación de la demanda;15;1;1;1
+5;Auto decretando pruebas;15;1;1;1
+6;Fallo de primera instancia;15;1;1;1
+7;Escrito de recurso;15;1;1;1
+8;Auto de admisión de recurso;15;1;1;1
+9;Notificación del recurso;15;1;1;1
+10;Contestación del recurso;15;1;1;1
+11;Auto de resolución de recurso;15;1;1;1
+12;Justificación el convenio;15;0;1;0
+13;Convenio;15;0;0;0
+14;Soporte del convenio;15;0;0;0
+15;Informe desarrollo del convenio;15;0;0;0
+16;Acta liquidación convenio;15;0;0;0
+17;Queja;15;1;1;1
+18;Indagación preliminar;15;0;0;0
+19;Auto de archivo;15;0;0;0
+20;Petición;15;1;1;1
+21;Respuesta a la petición;15;1;1;1
+22;Anexos a la petición;15;0;0;0
+23;Formato único de declaración;15;0;0;0
+24;Copia comunicación remisiorio a acción social;15;0;0;0
+25;Decisión de acción social;15;0;0;0
+26;Recepción formulaio;15;0;0;0
+27;Copia comunicación solicitante;15;0;0;0
+28;Informe visita cárcel;15;1;1;1
+29;Informe concejo municipal;15;0;0;0
+30;Informe de gestión a diferentes entidades;15;0;0;0
+31;Comunicación de comisiones;15;0;0;0
+32;Actuación comisión;15;0;0;0
+33;Copia de informe de comisión;15;0;0;0
+34;Remisión de comisión;15;0;0;0
+35;Libro ;15;0;0;0
+36;Apertura de investigaciones;15;0;0;0
+37;Descargo;15;0;0;0
+38;Fallos;15;0;0;0
+39;Escrito de discursos;15;0;0;0
+40;Consecutivo de resoluciones;15;0;0;0
+41;Solicitud;15;1;1;1
+42;Informe administrativo;15;0;0;0
+43;Anexos  ;15;0;0;0
+44;Evaluación de seguimiento;15;0;0;0
+45;Convocatoria a la comunidad;15;1;1;1
+46;Acta de conformación;15;1;1;1
+47;Certificado de inscripción de la veeduría;15;1;1;1
+48;Informes de veeduría;15;1;1;1
+49;Trámite de solicitud;15;1;1;1
+50;Respuesta solicitud;15;1;1;1
+51;Anexos a la solicitud;15;1;1;1
+52;Procuraduría regional Cundinamarca;15;1;1;1
+53;Procuraduría provincial Facatativá;15;1;1;1
+54;Fiscalía local;15;1;1;1
+55;Fiscalía seccional;15;1;1;1
+56;Contraloría de cundinamarca;15;1;1;1
+57;Informe;15;0;0;0
+58;Juzgado de familia del circuito ;15;1;1;1
+59;Juzgado penal del circuito ;15;1;1;1
+60;Juzgado civil del circuito;15;1;1;1
+61;Juzgado civil municipal ;15;1;1;1
+62;Juzgado 1° penal del circuito para adolescentes;15;1;1;1
+63;Juzgado penal municipal;15;1;1;1
+64;Hoja de vida;15;0;0;0
+65;Afiliaciones;15;0;0;0
+66;Póliza de cumplimiento;15;0;0;0
+67;Publicación;15;0;0;0
+68;Acta de liquidación;15;0;0;0
+69;Citación;15;0;0;0
+70;Planilla asistencia;15;0;0;0
+71;Acta;15;0;0;0
+72;Invitaciones;15;1;0;0

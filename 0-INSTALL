@@ -1,0 +1,13 @@
+                                Instalación Orfeo > 6.1  SkinaTech
+
+Dependencias
+~~~~~~~~~~~~
+
+PHP >= 7.3   
+
+PostgreSQL:       php73-pgsql
+MSSQL Server:     php73-mssql
+Oracle :          php73-oci8
+
+
+

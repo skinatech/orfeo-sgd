@@ -1,0 +1,32 @@
+# 
+# Cron Jobs de Orfeo5 
+#
+#   by Jaime E. Gomez (jgomez@skinatech.com)
+#
+# Copie este archivo como /etc/cron.d/orfeo despues de ajustarlo a su URL correcta
+#
+
+############## Entorno de Orfeo
+#####
+###
+# Crea los nuevos directorios para el nuevo año
+10 1 1 1 *  nobody  /usr/local/skina/sbin/inicie-anio-orfeo orfeo
+
+
+# Revision diaria de documentos pendientes
+0 6 * * * nobody  lynx -dump http://localhost/orfeo/radicacion/busca_agendados.php
+1 6 * * * nobody  lynx -dump http://localhost/orfeo/radicacion/busca_vencidos_conflujo.php
+2 6 * * * nobody  lynx -dump http://localhost/orfeo/radicacion/busca_vencidos_sinflujo.php
+
+############## Entorno de Pruebas
+#####
+###
+# Crea los nuevos directorios para el nuevo año
+10 2 1 1 *  nobody  /usr/local/skina/sbin/inicie-anio-orfeo pruebas
+
+# Revision diaria de documentos pendientes
+#0 6 * * * nobody  lynx -dump http://localhost/pruebas/radicacion/busca_agendados.php
+#1 6 * * * nobody  lynx -dump http://localhost/pruebas/radicacion/busca_vencidos_conflujo.php
+#2 6 * * * nobody  lynx -dump http://localhost/pruebas/radicacion/busca_vencidos_sinflujo.php
+
+

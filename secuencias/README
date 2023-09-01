@@ -1,0 +1,7 @@
+Éste directorio cuenta con los archivos necesarios para notificar 
+por medio de un correo, el estado de las secuencias y del directorio bodega, 
+luego de un reinicio de secuencias, esto se realiza por medio de la ejecución 
+del archivo notificador.php
+
+El comprimido hex.zip contiene la utilidad para ofuscar cadenas de texto,
+para descomprimir este se debe usar el estandar administrador de 2018

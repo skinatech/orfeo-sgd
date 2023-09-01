@@ -1,0 +1,143 @@
+# 
+# Configuracion de Apache para restringir listado
+#
+#   by Jaime E. Gomez (jgomez@skinatech.com)
+#
+# Copie este archivo como /etc/apache2/conf.d/orfeo despues de ajustarlo a su URL correcta
+#
+
+
+Alias /orfeo /var/www/html/orfeo-6.2
+Alias /pruebas /var/www/html/pruebas
+Alias /orfeo-sgd /var/www/html/orfeo-6.2
+
+<Directory /var/www/html/orfeo-6.2>
+    Options FollowSymLinks MultiViews
+    Options -Indexes
+    AllowOverride None
+    <IfModule security2_module>
+        #  --- La inclusión masiva de radicados en un expediente
+        SecRuleRemoveById 942100
+        #  --- Possible Session Fixation Attack: SessionID Parameter Name with No Referer
+        SecRuleRemoveById 943120
+        #  --- Inbound Anomaly Score Exceeded (Total Score: 5)
+        SecRuleRemoveById 949110
+        #  --- Inbound Anomaly Score Exceeded (Total Inbound Score: 5 - SQLI=0,XSS=0,RFI=0,LFI=0,RCE=0,PHPI=0,HTTP=0,SESS=5)
+        SecRuleRemoveById 980130
+        #  --- status
+        SecRuleRemoveById 960015
+        SecRuleRemoveById 960017
+        #  --- correspondencia.php
+        SecRuleRemoveById 970901
+        #  --- viewer de pdfs
+        SecRuleRemoveById 981173
+        #  --- NEW.php SQL injection
+        SecRuleRemoveById 981231
+        SecRuleRemoveById 981245
+        SecRuleRemoveById 981243
+        SecRuleRemoveById 960024
+        #  --- Cuerpo.php  Session fixation
+        SecRuleRemoveById 950000
+        #  --- uploadTx.php
+        SecRuleRemoveById 960915 
+        SecRuleRemoveById 200003
+        #  --- realizarTx.php
+        SecRuleRemoveById 981318
+        #  --- Cargar pdfs de la bodega
+        SecRuleRemoveById 958291
+        #  --- upload2.php
+        SecRuleRemoveById  200004
+        #  --- "URL Encoding Abuse Attack Attempt" /orfeo/expediente/cuerpo_exp.php
+        SecRuleRemoveById  920220
+# "Outbound Anomaly Score Exceeded (Total Score: 4)
+        SecRuleRemoveById  959100
+        #  --- PHP Information Leakage
+        SecRuleRemoveById 953100
+        #  --- Operator GE matched 4 at TX:outbound_anomaly_score
+        SecRuleRemoveById 980140
+    </IfModule>
+</Directory>
+
+<Directory /var/www/html/pqrs>
+    Options FollowSymLinks MultiViews
+    Options -Indexes
+    AllowOverride None
+    <IfModule security2_module>
+        #  --- PHP Information Leakage
+        SecRuleRemoveById 953100
+        #  --- Outbound Anomaly Score Exceeded
+        SecRuleRemoveById 959100
+        #  --- Operator GE matched 4 at TX:outbound_anomaly_score
+        SecRuleRemoveById 980140
+        #  --- Inbound Anomaly Score Exceeded (Total Inbound Score: 5 
+        SecRuleRemoveById 980130
+        #  --- SQL Injection Attack Detected via libinjectio (phpPgAdmin)
+        SecRuleRemoveById 942100
+        #  --- Inbound Anomaly Score Exceeded (Total Score: 5
+        SecRuleRemoveById 949110
+        #  --- PHP source code leakage 
+        SecRuleRemoveById 953110
+        #  --- US-ASCII Malformed Encoding XSS Filter - Attack Detecte
+        SecRuleRemoveById 941310
+        #  --- sqlite SQL Information Leakage'
+        SecRuleRemoveById 951250
+        #  --- Oracle SQL Information Leakage
+        SecRuleRemoveById 951120
+    </IfModule>
+</Directory>
+
+<Directory /home/*/public_html/pqrs/frontend/web>
+   RewriteEngine On
+   RewriteCond %{REQUEST_FILENAME} !-f
+   RewriteCond %{REQUEST_FILENAME} !-d
+</Directory>
+
+
+<Directory /var/www/html/*/bodega>
+    Options FollowSymLinks MultiViews
+    Options -Indexes
+    AllowOverride None
+    <FilesMatch "(?i)\.(php|php3?|phtml|js)$">
+            Order Deny,Allow
+            Deny from All
+    </FilesMatch>
+   php_admin_value engine Off
+</Directory>
+
+<Directory /var/www/html/*/quixplorer/orfeo>
+    Options FollowSymLinks MultiViews
+    Options -Indexes
+    AllowOverride None
+    <FilesMatch "(?i)\.(php|php3?|phtml|js)$">
+            Order Deny,Allow
+            Deny from All
+    </FilesMatch>
+   php_admin_value engine Off
+</Directory>
+
+<Directory /tmp>
+    Options FollowSymLinks MultiViews
+    Options -Indexes
+    AllowOverride None
+    <FilesMatch "(?i)\.(php|php3?|phtml|js)$">
+            Order Deny,Allow
+            Deny from All
+    </FilesMatch>
+   php_admin_value engine Off
+</Directory>
+
+<Directory /var/tmp>
+    Options FollowSymLinks MultiViews
+    Options -Indexes
+    AllowOverride None
+    <FilesMatch "(?i)\.(php|php3?|phtml|js)$">
+            Order Deny,Allow
+            Deny from All
+    </FilesMatch>
+    <FilesMatch "cron$">
+            Order Deny,Allow
+            Deny from All
+    </FilesMatch>
+   php_admin_value engine Off
+</Directory>
+

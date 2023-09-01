@@ -1,0 +1,132 @@
+<?php 
+/**
+ * Archivo de Configuracion ejemplo 
+ *
+ * @category  
+ * @package      SGD Orfeo
+ * @subpackage   
+ * @author       Jaime E. Gomez H.
+ * @author       Skina Technologies SAS (http://www.skinatech.com)
+ * @license      GNU/GPL <http://www.gnu.org/licenses/gpl-2.0.html>
+ * @link         http://www.orfeolibre.org
+ * @version      SVN: $Id$
+ * @since        
+ */
+
+//############# Datos de Empresa instalada
+$entidad= "Skina Technologies";        //Acronimo de la empresa
+$entidad_largo= 'Skina Technologies';  //Variable usada generalmente para los
+$nit_entidad = '1111111111';           // Nit de la empresa
+$entidad_tel =  'PBX: +57 2262080';    //Telefono o PBX de la empresa.
+$entidad_contacto = "http://localhost/orfeo-6.1/";      //URL de contacto
+$ambientePqrs = 'pqrs/frontend/web/';   //Ambiente pqrs pagina publica. 
+$entidad_dir = "Carrera 64 #96-17, Bogotá, Colombia";   //Direccion 
+$pais = "Colombia";                    // Pais Empresa o Entidad
+$abreviatura = '';                     // Abreviatura para los radicados e
+                                       //identificar la empresa de la que viene
+
+//############# Servidor de Bases de datos
+$driver =   "postgres";                // Tipo BD: postgres, oci8, mssql, mysql
+$servidor="127.0.0.1";                 // Mejor direccion que localhost
+$servicio="orfeo61db";
+$usuario="orfeo61usr";
+$contrasena="poozohmo6Zie";
+$db = $servicio;
+$assoc = 1;   	// Identifica si las columnas van en mayuscula o minuscula
+
+//############# Servidor de Bases de datos Histórica (utilizada en el módulo de consulta de documentos)
+$driverOLD     = "postgres";  // Tipo BD: postgres, oci8, mssql, mysql
+$servidorOLD   = "127.0.0.1"; // Mejor direccion que localhost
+$servicioOLD   = "orfeo6db";
+$usuarioOLD    = "orfeo6usr";
+$contrasenaOLD = "xxxxxxxx";
+$rutaBodegaOLD = "xxxxxxxx"; // Ruta de la bodega del orfeo viejo
+$flagConsultaOrfeoOld = false ; // Habilitar consulta Orfeo Viejo  : true | false 
+
+# Habilitar/Acceso a Inventario Documental  : true | false 
+$flagInventarioDocumental = false ;
+$estructuraOrfeo = false; // Indica si el visor se realizara con una versión anterior a orfeo o otra bd.
+
+//#############  Servidor de correo Electronico
+$servidor_mail_imap="imap.xxxxx.com";         // Servidor de consulta de correo
+$protocolo_mail="imaps";                     // Protocolo e consulta correo ( imap  | pop3 )
+$puerto_mail_imap=993;                       // Puerto de consulta de correo
+$servidor_mail_smtp="smtp.xxxxx.com";         // Servidor de Salida
+$protocolo_smtp = 'tls'; 
+$puerto_mail_smtp=587;                       // Puerto del servidor de Mail (25 | 587)
+$cuenta_mail="xxxxxx@xxxxx.com";// Usuario de conexion
+$contrasena_mail="xxxxxx";               // Contrasena
+
+//#############  Configuracion / Personalizacion Orfeo
+$menuAdicional = 0;               // 0 = Carpeta salida del radicador >0 = Redirecciona a dependencia especificada
+$usua_perm_avaz = 1;              // Habilita la configuracion avanzada de usuarios
+$ambiente = "orfeo-6.1";          // Variable que indica el ambiente de trabajo: desarrollo,prueba,orfeo
+$servProcDocs = "127.0.0.1:8000"; //Servidor que procesa los documentos
+
+$MODULO_RADICACION_DOCS_ANEXOS=1;
+$MODULO_ENVIOS = 2;
+
+//Color de Fondo de OrfeoGPL
+$colorFondo = "8cacc1";
+$administrador = "xxxxx@gmail.com";
+
+//Directorio de estilos a Usar.  
+//orfeo.css para usarlo cree una carpeta con su personalizacion y luego copie
+$ESTILOS_PATH = "/estilos/orfeo38/";
+$ESTILOS_PATH2 = "/estilos/orfeo50/";
+$ESTILOS_PATH_ORFEO = "/estilos/orfeo.css";
+$logoSuperiorOrfeo=true;  //Logo orfeo en el header
+$imagenes = "imagenes";
+$imagenes2 = "/estilos/orfeo50/imagenes50/";
+
+//############# Configuación relacionada a los radicados y a los módulos adicionales que se deben activar o no
+$dependenciaSalida = "999";
+$longitud_codigo_dependencia = '3';
+$dependenciaSecuencia = '998';  // Indica la dependencia desde donde arranca la secuencia correspondiente
+$estructuraRad = 'y'; // variable que será utilizada para indicar como se va a construir el número de radicado.
+$fonodoacumulado = false;
+$menuOrfeoExpress = true; // Deshabilita las opciones de todos los modulos del sistema para dejar lo basico
+$logoEtiqueta = true; // indica si se debe ver o no el logo en la etiqueta
+$mod_firma_qr = false; // indica si se utiliza el módulo de firmar documento
+$mod_firma_mecanica = false; // indica si se utiliza el módulo de firmar documento por medio de imagen de la firma
+$transferencias = false; // indica si se va a utilizar el módulo de transferencias documentales
+$mostrarListados = false;
+$saveInformation = 1; // indica si los remitentes/destinatarios se guarden (mayuscula=1, minuscula=2, titulo=3)
+$facturaElectronica = false; // indca si se va a utilizar la radicación email de facturas electronicas (true = si, false = no)
+
+/****
+ * Importante tener en cuenta, si $unificacionRadicados es true se debe validar la tabla sgd_trad_tiporad la columna 
+ * mostrar_comoTipo para la PQRS debe estar en 0
+*****/
+$unificacionRadicados = false;
+
+$entidad_depsal = str_pad("999",$longitud_codigo_dependencia,'0', STR_PAD_LEFT);//Guarda el codigo de la dependencia de salida
+
+/**** 
+ * Información relacionada a la PQRS 
+ *  @tipoRadicadoPqr = indica el número de identifica a la PQRS
+ *  @usuaRecibeWeb = usua_codi que recibe los radicados en la bandeja correspondiente
+ *  @$depeRadicaFormularioWeb = depe_codi responsable de recibir las pqrs
+ *  @secRadicaFormularioWeb =  secuencia que se afecta, se debe cambiar para producción
+ */
+$tipoRadicadoPqr = '4'; 
+$usuaRecibeWeb   = 1;
+$depeRadicaFormularioWeb = str_pad("998",$longitud_codigo_dependencia,'0', STR_PAD_LEFT); 
+$secRadicaFormularioWeb  = "secr_tp".$tipoRadicadoPqr."_".$depeRadicaFormularioWeb;
+
+/**
+ * Para cuando se pase a producción deben estar en 998 (dependen de la longitud de la dependencia)
+ *  @usuaRecibeWebPruebas   = 1;
+ *  @$secRadicaFormWebPruebas = 'secr_tp4_998';
+ *****/
+$usuaRecibeWebPruebas   = 1;
+$dependenciaPruebas= "998";
+
+# ----   By Orfeo Express 
+$DIR_RAIZ="/var/www/html/$ambiente";
+#
+$ADODB_PATH="$DIR_RAIZ/adodb";
+$PEAR_PATH="$DIR_RAIZ/pear";
+$ADODB_CACHE_DIR="$DIR_RAIZ/bodega/tmp"; 
+?>
+

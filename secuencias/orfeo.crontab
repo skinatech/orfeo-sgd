@@ -1,0 +1,56 @@
+# 
+# Cron Jobs de Orfeo5 
+#   by Jaime E. Gomez (jgomez@skinatech.com)
+# Copie este archivo como /etc/cron.d/orfeo despues de ajustarlo a su URL correcta
+#
+
+############## Entorno de Orfeo
+#####
+###
+
+# Crea los nuevos directorios para el nuevo año
+10 1 1 1 *  root  lynx -dump "http://localhost/orfeo/secuencias/carpeta_bodega.php?anoCrear=0000" > /var/www/html/orfeo/secuencias/bodegaDirectorios.log
+12 1 1 1 *  root  /var/www/html/orfeo/secuencias/permisosBodega.sh
+
+# Prueba los permisos de ejecucion en orfeo
+37 * * * *  root  /var/www/html/orfeo/secuencias/test_permisosBodega.sh
+
+#Actualiza las secuencias para el nuevo año
+11 1 1 1 *  root  lynx -dump "http://localhost/orfeo/secuencias/secuenciasRadicacion.php?modoConexionBD=0&reiniciarSecuencias=Ejecutar+SQL+Reiniciar+Secuencias" > /var/www/html/orfeo/secuencias/reinicioSecuencias.log
+
+#Notificador de reinicio de secuencias
+30 23 31 12 *  root  lynx -dump -width 400 "http://localhost/orfeo/secuencias/notificador.php" >> /var/www/html/orfeo/secuencias/notificadorSecuencias.log
+15 1 1 1 *  root  lynx -dump -width 400 "http://localhost/orfeo/secuencias/notificador.php" >> /var/www/html/orfeo/secuencias/notificadorSecuencias.log
+
+# Revision diaria de documentos pendientes
+0 6 * * * nobody  lynx -dump http://localhost/orfeo/radicacion/busca_agendados.php
+1 6 * * * nobody  lynx -dump http://localhost/orfeo/radicacion/busca_vencidos_conflujo.php
+2 6 * * * nobody  lynx -dump http://localhost/orfeo/radicacion/busca_vencidos_sinflujo.php
+
+############## Entorno de Pruebas
+#####
+###
+
+# Crea los nuevos directorios para el nuevo año
+10 1 1 1 *  root  lynx -dump "http://localhost/pruebas/secuencias/carpeta_bodega.php?anoCrear=0000" > /var/www/html/pruebas/secuencias/bodegaDirectorios.log
+12 1 1 1 *  root  /var/www/html/pruebas/secuencias/permisosBodega.sh
+
+# Prueba los permisos de ejecucion en pruebas
+37 * * * *  root  /var/www/html/pruebas/secuencias/test_permisosBodega.sh
+
+#Actualiza las secuencias para el nuevo año
+11 1 1 1 *  root  lynx -dump "http://localhost/pruebas/secuencias/secuenciasRadicacion.php?modoConexionBD=0&reiniciarSecuencias=Ejecutar+SQL+Reiniciar+Secuencias" > /var/www/html/pruebas/secuencias/reinicioSecuencias.log
+
+#Notificador de reinicio de secuencias
+30 23 31 12 *  root  lynx -dump -width 400 "http://localhost/pruebas/secuencias/notificador.php" >> /var/www/html/pruebas/secuencias/notificadorSecuencias.log
+15 1 1 1 *  root  lynx -dump -width 400  "http://localhost/pruebas/secuencias/notificador.php" >> /var/www/html/pruebas/secuencias/notificadorSecuencias.log
+
+# Crea los nuevos directorios para el nuevo año
+#10 1 1 1 *  nobody  lynx -dump "http://localhost/pruebas/instalacion/carpeta_bodega.php?anoCrear=`date +%Y`"
+#11 1 1 1 *  nobody  lynx -dump "http://localhost/pruebas/instalacion/secuenciasRadicacion.php?modoConexionBD=0&reiniciarSecuencias=Ejecutar+SQL+Reiniciar+Secuencias"
+
+# Revision diaria de documentos pendientes
+0 6 * * * nobody  lynx -dump http://localhost/pruebas/radicacion/busca_agendados.php
+1 6 * * * nobody  lynx -dump http://localhost/pruebas/radicacion/busca_vencidos_conflujo.php
+2 6 * * * nobody  lynx -dump http://localhost/pruebas/radicacion/busca_vencidos_sinflujo.php
+

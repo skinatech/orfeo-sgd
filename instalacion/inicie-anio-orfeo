@@ -1,0 +1,19 @@
+#!/bin/bash
+#
+# Ejecuta la creacion de directorios y rel reinicio de secuencias
+#
+# USO: inicie-anio-orfeo [prefijo del servicio]
+#
+# EJM   inicie-anio-orfeo pruebas
+#
+
+if [[ $1 == "" ]] ; then
+  echo "USO: inicie-anio-orfeo [prefijo del servicio]"
+  exit 1
+fi
+
+lynx -dump "http://localhost/$1/instalacion/carpeta_bodega.php?anoCrear=`date +%Y`"
+sleep 3
+lynx -dump "http://localhost/$1/instalacion/secuenciasRadicacion.php?modoConexionBD=0&reiniciarSecuencias=Ejecutar+SQL+Reiniciar+Secuencias"
+
+

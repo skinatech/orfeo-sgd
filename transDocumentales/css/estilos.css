@@ -1,0 +1,18 @@
+td.details-control {
+    background: url('../images/details_open.png') no-repeat center center;
+    cursor: pointer;
+}
+
+tr.shown td.details-control {
+    background: url('../images/details_close.png') no-repeat center center;
+}
+
+span{
+    color: rgb(245, 104, 104);
+}
+
+.navbar-default{
+    background-color: #8f0000;;
+    border-color: #B3B3B3;
+}
+

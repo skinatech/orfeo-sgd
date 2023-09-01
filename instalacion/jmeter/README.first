@@ -1,0 +1,11 @@
+
+Conjunto de pruebas automatizadas de Orfeo usando jmeter
+
+Para que funcione necesita varias condiciones
+
+1. Una base de datos limpia. Recien instalada
+
+2. Configurar el URL y el protoco
+
+3. Tener una identidad de sesion  SSID valido
+

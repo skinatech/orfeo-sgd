@@ -1,0 +1,102 @@
+# Changelog
+Todos los cambios notables de este proyecto se documentarán en este archivo.
+
+## facturacion electrónica
+1requiere instalar php-zip
+-Se presento un bloqueo de WAF  
+[Sat Jul 09 01:37:40.235437 2022] [:error] [pid 2067] [client 192.168.0.8:51744] [client 192.168.0.8] ModSecurity: Rule 7f9e39fabf00 [id "-"][file "/usr/share/modsecurity-crs/rules/RESPONSE-951-DATA-LEAKAGES-SQL.conf"][line "345"] - Execution error - PCRE limits exceeded (-8): (null). [hostname "192.168.0.10"] [uri "/orfeo/radicacion/NEW.php"] [unique_id "YskiMcPK@k6dhoxbPRUULwAAAAo"], referer: https://192.168.0.10/
+Agregue a /etc/apache2/conf-enabled/orfeo.conf la siguiente excepcion SecRuleRemoveById 951210
+-tabla sgd_dir_drecciones la columna sgd_oem_codigo marca un desbordamiento por el numero de NIT, la paso a un varchar(255)
+-agregar a la tabla anexos_tipo (27,xml, XML Extended Markup Language, fas fa-file-invoice)
+
+## [6.1] - 2021-04-28
+### [Added]
+#
+- Unificación de tipos de radicados Entrada y PQRS.
+- Radicación email para diferentes tipos de radicados Entrada y PQRS.
+- Semaforización de los radicados (Radicados Vencidos, Radicados Pronto Vencer (2 días), Radicados al Día).
+- Creación de estadisticas para seguimientos de PQRS.
+- Carga de anexos directamente desde el area de correspondiencia.
+- Aseguramiento de la bodega de documentos y al código fuente, evitar vulnerabilidades
+
+### [Changed]
+#
+- Correcciones de Bugs en el proceso de radicación cuando no se selecciona usuario responsable.
+- Actualización de la estructura de base de datos en relaciones, llaves, autoincrementales.
+- Actualización del repositorio de Plantillas y Manuales del sistema.
+- Limpieza de tablas o columnas obsoletas para el proceso de Orfeo.
+- Limpieza de codigo basura del sistema.
+
+
+## [6.0] - 2020-03-03
+### [Added]
+#
+- Compatibilidad con versiones de PHP a > 7.0
+- Módulo de firma digital por QR.
+- Transferencias documentales de radicados.
+- Pulicación de documentos del sistema a pagina publica de PQRS.
+- Envio de respuesta por correo electrónico.
+- Creación de estadisticas relacionadas a PQRS, para estados, seguimineto y tiempos transcurridos.
+- Creación de permisos a nivel de consulta para acceder a los radicados del sistema.
+
+### [Changed]
+#
+- Actualización de Expedientes virtuales, para la asignación de TRD automaticamente cuando se crea el expediente.
+- Actualización en los permisos de roles y de usuarios para asignación de las nuevas funcionalidades.
+- Correcciones de las estadisticas del sistema, para arrojar correctamente los resultados.
+- Unificación de pasos en el proceso de imprmir radicado con el proceso de asignar radicado.
+- Actualización de las tranascciones disponibles en el sistema para guardar mas al detalle el proceso que se realiza.
+- Actualización del templete de notificaciones que se generan en Orfeo
+
+
+## [5.8] - 2019-06-27
+### [Added]
+#
+- Automatización del reinicio de secuencias y creación de la bodega a medida que cambia el año.
+- Módulo de roles y permisos, se divide en 3 submodulos (Administración roles, permisos y tipos documentales).
+- Creación de estadísticas (roles y permisos, acceso a tipos documentales).
+- Creación de visor interno para la visualización de los documentos PDF.
+- Restricción al sistema para no permita acceder a las rutas de la bodega.
+- Se asocia este visor a las opciones de anexos, expedientes y consultas.
+- TRDs trasversales para entidades publicas y privadas.
+- Comversión del documento de respuesta a PDF para evitar la edición del mismo.
+- Busqueda por Full Text Search.
+- Reasignación masiva de radicados.
+
+### [Changed]
+#
+- Actualización del módulo de usuarios, agregando la opción de roles y permitir cambiar los permisos usuarios en especifico.
+- Restructuración del formulario usuario, disminución pasos, validaciones de botones, campos obligatorios.
+- Restructuración del formulario de permisos de acceso al sistema por usuario, creación de permisos(descargar documentos pdf).
+- Actualización formulario de radicación para asignar TRD desde la misma radicación del documento. 
+- Inclusión auntomatica de TRD a los anexos que se carguen en el sistema.
+- Actualización de alertas de correo electrónico, notificaciones multiples usuarios y dependencias.
+- Actualización de variables de combinación de correspondencia(fecha de radicación, la dependencia, visto bueno).
+- Actualziacion del archivo de configuración agregando variables para estructura del radicado.
+- Inclusión de radicados de forma masiva en expediente virtuales y trazabilidad de la inclusión de los mismos.
+- Actualización de base de datos para aceptar las nuevas variables de configuración y de combinación de correspondencia.
+- Actualización de los manuales del sistema, segregándolo por módulo.
+
+
+## [5.0] - 2017-04-24
+### [Added]
+#
+- Aseguramiento al tratamiento de datos.
+- visualización de imagen principal.
+- Compatibilidad con postgresql, mariadb y sqlserver.
+- Cambio completo de look and feel.
+- Los tooltips de bootstrap funcionen, es necesario jquery, js de bootstrap e inicializar esta función al final del archivo.
+- Adecuación de bootstrap y adecuación de variables para cambiar estilos de Orfeo sin gran implicación.
+
+### [Changed]
+#
+- Disminución de pasos en el proceso de radicación.
+- Actualizaciones en alertas de radicados vencidos.
+- Mejor distribución del formulario de radicación.
+- Redistribución de menús y módulos del sistema.
+- Actualziación de las operaciones o tranascciones del sistema.
+- Actualización de hojas de estilo, usando la variable "ruta_raiz" y variable se sesión "ESTILOS_PATH_ORFEO".
+- Actualización del archivo "config.php" agregando variables de configuración general del sistema.
+- Actualización de estructura de base de datos respecto a tipos de datos y longitudes.
+- Se corrigieron problemas con las rutas de la librería usada para generar el menú de fechas (spiffyCal_v2_1.js)
+- Se establece la ruta raíz en código javascript la funcion setRutaRaiz ejemplo : "setRutaRaiz(..);" , "setRutaRaiz(../..);".

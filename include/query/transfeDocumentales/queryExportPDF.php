@@ -1,0 +1,94 @@
+<?php 
+switch ($db->driver) {
+    case 'mssql':
+        
+        $sqlC = " ";
+       
+        break;
+    case 'mysql':
+        
+        $sqlC = " ";
+        
+        break;
+    case 'oracle':
+    case 'oci8':
+        
+        $sqlC = " ";
+
+        break;
+    case 'postgres':
+        $group_by = '';
+        $sqlC = "SELECT 
+                -- R.RADI_NUME_RADI AS RADI_NUME_RADI,
+                COUNT( DISTINCT R.RADI_NUME_RADI) AS CANT_NUME_RADI,
+                E.SGD_EXP_NUMERO AS NUM_EXPEDIENTE ,
+                -- SEXP.SGD_EXP_NUMERO AS NUM_EXPEDIENTE, 
+                CASE WHEN PAREXP.SGD_PAREXP_ORDEN = 1 THEN SEXP.SGD_SEXP_PAREXP1
+                WHEN PAREXP.SGD_PAREXP_ORDEN = 2 THEN SEXP.SGD_SEXP_PAREXP2
+                WHEN PAREXP.SGD_PAREXP_ORDEN = 3 THEN SEXP.SGD_SEXP_PAREXP3
+                WHEN PAREXP.SGD_PAREXP_ORDEN = 4 THEN SEXP.SGD_SEXP_PAREXP4
+                WHEN PAREXP.SGD_PAREXP_ORDEN = 5 THEN SEXP.SGD_SEXP_PAREXP5
+                  END AS NOMBRE_EXPEDIENTE,
+                PAREXP.SGD_PAREXP_ETIQUETA AS CONSERVACION,
+                SBRD.SGD_SBRD_SOPORTE AS SOPORTE,
+                SRD.SGD_SRD_DESCRIP AS SERIE, 
+                SBRD.SGD_SBRD_DESCRIP AS SUBSERIE,
+                -- TD.sgd_tpr_descrip AS TIPO_DOCUMENTAL,
+                MIN(E.SGD_EXP_FECH_ARCH) AS NIM_FECHA_ARCHIVADO,
+                MAX(E.SGD_EXP_FECH_ARCH) AS MAX_FECHA_ARCHIVADO,
+                MIN(R.RADI_NUME_RADI) AS MIN_NUME_RADI,
+                MAX(R.RADI_NUME_RADI) AS MAX_NUME_RADI,
+                E.DEPE_CODI AS DEPENDENCIA_ARCHIVADO,
+                U.USUA_NOMB AS USUARIO_ARCHIVADO
+ 
+            FROM RADICADO AS R
+            INNER JOIN SGD_EXP_EXPEDIENTE AS E ON E.RADI_NUME_RADI = R.RADI_NUME_RADI
+            INNER JOIN SGD_SEXP_SECEXPEDIENTES AS SEXP ON E.SGD_EXP_NUMERO = SEXP.SGD_EXP_NUMERO
+            INNER JOIN SGD_PAREXP_PARAMEXPEDIENTE AS PAREXP ON SEXP.depe_codi = PAREXP.depe_codi
+            INNER JOIN SGD_SRD_SERIESRD AS SRD ON SEXP.SGD_SRD_CODIGO = SRD.SGD_SRD_CODIGO
+            INNER JOIN SGD_SBRD_SUBSERIERD AS SBRD ON SEXP.SGD_SRD_CODIGO = SBRD.SGD_SRD_CODIGO AND SEXP.SGD_SBRD_CODIGO = SBRD.SGD_SBRD_CODIGO
+            -- INNER JOIN SGD_TPR_TPDCUMENTO AS TD ON R.TDOC_CODI = TD.SGD_TPR_CODIGO
+            -- INNER JOIN USUARIO U ON R.RADI_USUA_ACTU = U.USUA_CODI AND R.RADI_DEPE_ACTU = U.DEPE_CODI
+            INNER JOIN USUARIO U ON E.RADI_USUA_ARCH = U.USUA_LOGIN
+            WHERE E.sgd_exp_estado = '1' and ";
+
+            $group_by = ' GROUP BY 
+                -- R.RADI_NUME_RADI,
+                E.SGD_EXP_NUMERO,
+                U.USUA_NOMB,
+                SEXP.SGD_EXP_NUMERO,
+                NOMBRE_EXPEDIENTE,
+                PAREXP.SGD_PAREXP_ETIQUETA,
+                SBRD.SGD_SBRD_SOPORTE, 
+                SRD.SGD_SRD_DESCRIP,
+                SBRD.SGD_SBRD_DESCRIP,
+                -- TD.sgd_tpr_descrip,
+                E.DEPE_CODI ';
+
+        $sqlNotas = "SELECT 
+                R.RADI_NUME_RADI AS RADI_NUME_RADI,
+                E.SGD_EXP_NUMERO AS NUM_EXPEDIENTE
+            FROM RADICADO AS R
+            INNER JOIN SGD_EXP_EXPEDIENTE AS E ON E.RADI_NUME_RADI = R.RADI_NUME_RADI
+            WHERE E.sgd_exp_estado = '1' and  ";
+
+        $sqlTrans = "SELECT 
+                R.RADI_NUME_RADI,
+                E.SGD_EXP_NUMERO AS NUM_EXPEDIENTE,
+                SRD.SGD_SRD_CODIGO AS SERIE, 
+                SBRD.SGD_SBRD_CODIGO AS SUBSERIE,
+                R.TDOC_CODI AS TIPO_DOCUMENTAL,
+                H.HIST_FECH AS FECHA_ARCHIVADO,
+                H.DEPE_CODI AS DEPE_CODI_ARCH,
+                H.USUA_CODI AS USUA_CODI_ARCH,
+                U1.USUA_EMAIL AS EMAIL_USUA_ARCH
+                FROM RADICADO AS R
+                INNER JOIN SGD_EXP_EXPEDIENTE AS E ON E.RADI_NUME_RADI = R.RADI_NUME_RADI
+                INNER JOIN SGD_SEXP_SECEXPEDIENTES AS SEXP ON E.sgd_exp_numero = SEXP.sgd_exp_numero
+                INNER JOIN SGD_SRD_SERIESRD AS SRD ON SEXP.SGD_SRD_CODIGO = SRD.SGD_SRD_CODIGO
+                INNER JOIN SGD_SBRD_SUBSERIERD AS SBRD ON SEXP.SGD_SRD_CODIGO = SBRD.SGD_SRD_CODIGO AND SEXP.SGD_SBRD_CODIGO = SBRD.SGD_SBRD_CODIGO
+                INNER JOIN SGD_TPR_TPDCUMENTO AS TD ON R.TDOC_CODI = TD.SGD_TPR_CODIGO
+                INNER JOIN HIST_EVENTOS H ON R.RADI_NUME_RADI = H.RADI_NUME_RADI AND H.SGD_TTR_CODIGO = '57' 
+                INNER JOIN USUARIO U1 ON H.USUA_CODI = U1.USUA_CODI AND H.DEPE_CODI = U1.DEPE_CODI ";
+        break;
+}
